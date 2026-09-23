@@ -141,7 +141,7 @@ SWEA `5644` 무선 충전, `5650` 핀볼 게임, `4014` 활주로 건설도 이 
 ## 진행 방법
 
 ```bash
-git ps swea 2382
+./ps swea 2382
 ```
 
 풀고 나서 `/problem-feedback problems/swea/2382` → 복잡도·문제점·대안이 채워진다.
