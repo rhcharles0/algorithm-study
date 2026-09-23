@@ -21,11 +21,11 @@ ls -dt problems/*/*/ | head -1
 2. 파일이 없거나 템플릿 그대로면 멈추고 사용자에게 알린다. 추측으로 채우지 않는다.
 3. README.md 상단 표에서 비어 있는 칸(출처/문제번호/링크/난이도/카테고리/푼 날짜/언어)을 채운다.
    - 폴더 경로는 `problems/<출처>/<번호>` 다. 폴더명에 문제 이름이 없으니 **출처와 번호는 경로에서 그대로 가져온다.**
-   - **출처는 반드시 채운다.** 폴더명(`programmers` `leetcode` `swea` `baekjoon`)을 한국어 정식 명칭으로 적는다:
-     `프로그래머스` / `LeetCode` / `SWEA` / `백준`
+   - **출처는 반드시 채운다.** 폴더명(`programmers` `swea` `codetree` `leetcode` `baekjoon`)을 한국어 정식 명칭으로 적는다:
+     `프로그래머스` / `SWEA` / `코드트리` / `LeetCode` / `백준`
    - **링크도 출처+번호로 만들어 채운다.** 비워 두지 않는다.
      - 프로그래머스 `https://school.programmers.co.kr/learn/courses/30/lessons/<번호>`
-     - 백준 `https://www.acmicpc.net/problem/<번호>`
+     - 코드트리 · 백준: URL 규칙이 없거나(코드트리) 서비스가 종료되어(백준) 링크는 `?` 로 두고 물어본다
      - LeetCode `https://leetcode.com/problems/<slug>/` — slug 는 README 제목에서 만든다
      - SWEA `https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=<번호>` (번호 체계가 달라 확실치 않으면 `?` 로 두고 물어본다)
    - 문제 이름은 폴더명에 없다. README 제목(`# <문제 이름>`)에서 가져오고, 제목이 아직 템플릿 그대로면 사용자에게 물어본다.

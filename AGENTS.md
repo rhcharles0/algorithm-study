@@ -17,7 +17,7 @@ problems/<출처>/<번호>/                             문제 풀이
 _template-problem/    concepts/_template.md        템플릿
 ```
 
-출처: `programmers` `leetcode` `swea` `baekjoon` · 폴더명은 **번호만** (`problems/programmers/42586/`) · LeetCode 는 4자리 zero-pad (`0001`)
+출처: `programmers` `swea` `codetree` `leetcode` `baekjoon`(BOJ 종료, 미사용) · 폴더명은 **번호만** (`problems/programmers/42586/`) · LeetCode 는 4자리 zero-pad (`0001`)
 문제 이름은 폴더명이 아니라 그 안 `README.md` 제목에 적는다.
 
 ## 코드 규칙
@@ -52,7 +52,7 @@ _template-problem/    concepts/_template.md        템플릿
 형식 `<type>: <설명>` — **CI 와 `.githooks/commit-msg` 가 강제한다. 어기면 커밋/푸시가 막힌다.**
 
 type: `solve` `feedback` `note` `fix` `refactor` `docs` `chore`
-출처 약어: `PG` `LC` `SWEA` `BOJ`
+출처 약어: `PG` `SWEA` `CT`(코드트리) `LC` `BOJ`
 
 ```
 solve: PG 42586 기능개발 (java, cpp)

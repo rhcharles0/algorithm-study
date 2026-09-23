@@ -20,7 +20,8 @@ problems/                       문제 풀이 (코드) — 출처별
 ├── programmers/
 ├── leetcode/
 ├── swea/
-└── baekjoon/
+├── codetree/
+└── baekjoon/        (BOJ 서비스 종료, 복귀 대비해 유지)
      └── <번호>/
           ├── README.md         문제 이름 + 출처 + 복잡도 + 피드백
           ├── Solution.java
@@ -39,7 +40,8 @@ _template-problem/              문제 폴더 템플릿
 | 프로그래머스 | `problems/programmers/42586/` | 기능개발 |
 | LeetCode | `problems/leetcode/0001/` — 번호 4자리 zero-pad | Two Sum |
 | SWEA | `problems/swea/1954/` | 달팽이 숫자 |
-| 백준 | `problems/baekjoon/1912/` | 연속합 |
+| 코드트리 | `problems/codetree/<문제-slug>/` | 번호가 없어 영문 slug 사용 |
+| 백준 | `problems/baekjoon/1912/` | 연속합 — BOJ 종료로 당분간 미사용 |
 
 > 폴더명에 이름을 넣지 않는 이유: 한글 경로가 길어지고, 문제 이름을 잘못 옮겨 적으면 고치기 번거롭다.
 > 번호만 있으면 출처 + 번호로 문제를 바로 찾을 수 있다.
@@ -155,12 +157,12 @@ git add . && git commit -m "solve: PG 42586 기능개발 (java, cpp)"
 | `solve:` | 문제 풀이 추가 | `solve: PG 42586 기능개발 (java, cpp)` |
 | `feedback:` | 피드백 추가/수정 | `feedback: PG 42586 복잡도 분석` |
 | `note:` | 개념 노트 | `note: 힙 / 우선순위 큐` |
-| `fix:` | 틀린 풀이·오타 수정 | `fix: BOJ 1912 int 오버플로우` |
-| `refactor:` | 통과한 풀이 개선 | `refactor: PG 42586 O(N²) → O(N log N)` |
+| `fix:` | 틀린 풀이·오타 수정 | `fix: SWEA 2382 int 오버플로우` |
+| `refactor:` | 통과한 풀이 개선 | `refactor: SWEA 5656 O(N²) → O(N log N)` |
 | `docs:` | 문서 | `docs: 실행 방법 보강` |
 | `chore:` | 구조, 템플릿, 설정 | `chore: gitignore에 cmake 산출물 추가` |
 
-출처 약어: `PG`(프로그래머스) · `LC`(LeetCode) · `SWEA` · `BOJ`(백준)
+출처 약어: `PG`(프로그래머스) · `SWEA` · `CT`(코드트리) · `LC`(LeetCode) · `BOJ`(백준)
 
 `Merge`, `Revert` 로 시작하는 커밋은 검사 대상에서 제외된다.
 
