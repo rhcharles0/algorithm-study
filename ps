@@ -1,25 +1,55 @@
 #!/bin/bash
 # ./ps <출처> <번호> — 문제 폴더를 템플릿에서 만든다. (problem solving)
-#   ./ps pg 42586    →  problems/programmers/42586/
-#   ./ps swea 2382   →  problems/swea/2382/
-#   ./ps lc 1        →  problems/leetcode/0001/   (4자리 zero-pad)
+# 인자 없이 실행하면 대화형으로 물어본다. ./ps help 로 사용법.
 set -e
 cd "$(git rev-parse --show-toplevel)"
 
-case "$1" in
-  pg|programmers) site=programmers ;;
-  swea)           site=swea ;;
-  ct|codetree)    site=codetree ;;
-  lc|leetcode)    site=leetcode ;;
-  boj|baekjoon)   site=baekjoon ;;
-  *)
-    echo "사용법: ./ps <pg|swea|ct|lc|boj> <문제번호>"
-    echo "예:     ./ps pg 42586"
-    exit 1 ;;
-esac
+MENU="  p) programmers   s) swea   c) codetree   l) leetcode   b) baekjoon"
 
-id="$2"
-[ -z "$id" ] && { echo "문제 번호를 입력하세요"; exit 1; }
+usage() {
+  cat <<'USAGE'
+사용법: ./ps [출처] [문제번호]
+
+  출처는 한 글자 / 약어 / 전체 이름 아무거나 된다.
+
+    p  pg    programmers   ./ps p 42586    → problems/programmers/42586/
+    s        swea          ./ps s 2382     → problems/swea/2382/
+    c  ct    codetree      ./ps c maze     → problems/codetree/maze/
+    l  lc    leetcode      ./ps l 1        → problems/leetcode/0001/   (4자리 zero-pad)
+    b  boj   baekjoon      ./ps b 1912     → problems/baekjoon/1912/
+
+  ./ps          인자 없이 실행 → 대화형으로 물어본다
+  ./ps help     이 도움말
+
+  이미 있는 폴더는 덮어쓰지 않는다.
+USAGE
+}
+
+resolve() {
+  case "$1" in
+    p|pg|programmers) site=programmers ;;
+    s|swea)           site=swea ;;
+    c|ct|codetree)    site=codetree ;;
+    l|lc|leetcode)    site=leetcode ;;
+    b|boj|baekjoon)   site=baekjoon ;;
+    *) return 1 ;;
+  esac
+}
+
+case "$1" in -h|--help|help) usage; exit 0 ;; esac
+
+if [ -z "$1" ]; then
+  echo "$MENU"
+  read -rsn1 -p "출처: " key; echo
+  resolve "$key" || { echo "취소"; exit 1; }
+  echo "  → $site"
+  read -rp "문제 번호: " id
+else
+  resolve "$1" || { echo "알 수 없는 출처: '$1'"; echo; usage; exit 1; }
+  id="$2"
+fi
+
+[ -z "$id" ] && { echo "문제 번호가 비었습니다"; exit 1; }
 [ "$site" = leetcode ] && [[ "$id" =~ ^[0-9]+$ ]] && id=$(printf "%04d" "$id")
 
 dir="problems/$site/$id"

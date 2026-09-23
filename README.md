@@ -59,15 +59,28 @@ _template-problem/              문제 폴더 템플릿
 cd problems/programmers/42586
 ```
 
-| 출처 인자 | 폴더 |
-|---|---|
-| `pg` | `programmers` |
-| `swea` | `swea` |
-| `ct` | `codetree` |
-| `lc` | `leetcode` — 번호를 4자리로 자동 zero-pad (`./ps lc 1` → `0001`) |
-| `boj` | `baekjoon` |
+출처는 **한 글자**로 줄여 쓴다. 약어(`pg` `ct` `lc` `boj`)나 전체 이름도 받는다.
 
-이미 있는 폴더면 덮어쓰지 않고 멈춘다. 레포 루트에서 실행한다 (설정 불필요).
+| 키 | 폴더 | 예 |
+|---|---|---|
+| `p` | programmers | `./ps p 42586` |
+| `s` | swea | `./ps s 2382` |
+| `c` | codetree | `./ps c maze-escape` |
+| `l` | leetcode | `./ps l 1` → `0001` (4자리 자동 zero-pad) |
+| `b` | baekjoon | `./ps b 1912` |
+
+**뭘 칠지 기억 안 나면 그냥 `./ps`** — 메뉴가 뜨고 한 글자만 누르면 된다.
+
+```
+$ ./ps
+  p) programmers   s) swea   c) codetree   l) leetcode   b) baekjoon
+출처:              ← p 를 누르면
+  → programmers
+문제 번호: 42586
+생성됨: problems/programmers/42586
+```
+
+`./ps help` 로 전체 사용법. 이미 있는 폴더는 덮어쓰지 않는다. 설정 불필요, 레포 루트에서 실행한다.
 
 **2. README 위쪽 먼저 작성** — 제목(문제 이름) / 출처 / 번호 / 링크 / 난이도 / 푼 날짜, 그리고 `문제 요약`, `풀이 접근`.
 
