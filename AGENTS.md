@@ -71,3 +71,52 @@ git config alias.cm '!bash scripts/git-cm.sh'
 ```
 
 문제 폴더는 `./ps <pg|swea|ct|lc|boj> <번호>` 로 만든다. `cp -r _template-problem ...` 을 직접 치지 않는다.
+
+## 이슈
+
+진행 관리는 GitHub 이슈로 한다. **Phase = 부모 이슈, 문제 하나 = 하위 이슈**의 2단 구조다.
+
+```
+#9  Phase 0 — 감 되찾기 (1주)        ← 부모
+ ├─ #14 PG 42839 소수 찾기            ← 하위 (GitHub sub-issue)
+ ├─ #15 PG 42842 카펫
+ └─ ...
+```
+
+- **부모 이슈 본문에 문제 체크리스트를 두지 않는다.** 하위 이슈와 두 군데를 손으로 맞추면 반드시 어긋난다.
+  GitHub 이 sub-issue 진행률(`2/7`)을 자동 집계한다.
+- 하위 이슈 제목은 `<출처 약어> <번호> <문제 이름> — <유형>` (예: `PG 43165 타겟 넘버 — DFS`).
+- 하위 이슈 본문에는 출처·번호·링크·유형 표와 `Java 풀이 / C++ 풀이 / problem-feedback 실행` 체크박스만.
+- Phase 별 문제 목록의 출처는 [problems/README.md](problems/README.md) 다. **번호를 지어내지 않는다.**
+  커리큘럼에 없는 문제를 이슈로 만들려면 먼저 커리큘럼에 추가하고 커밋한다.
+
+### 이슈 생성
+
+**항상 자신에게 assign 한다.** 개인 레포라 미할당 이슈는 관리 대상에서 새어 나간다.
+`gh issue create` 는 기본 assign 옵션이 없으므로 alias 를 쓴다. 클론 직후 한 번:
+
+```bash
+gh alias set ic 'issue create -a @me'
+```
+
+```bash
+gh ic -t "PG 43165 타겟 넘버 — DFS" -F -     # -a @me 가 이미 붙어 있다
+```
+
+**에이전트는 `gh issue create` 를 직접 쓰지 않는다.** `gh ic` 를 쓰거나,
+불가능하면 `-a @me` 를 명시적으로 붙인다.
+
+### 하위 이슈 연결
+
+`gh` 에 전용 명령이 없어 REST API 를 직접 친다. `sub_issue_id` 는 **이슈 번호가 아니라 DB id** 이고,
+`-f`(문자열) 가 아니라 **`-F`(정수)** 로 보내야 한다.
+
+```bash
+id=$(gh api repos/{owner}/{repo}/issues/<하위번호> --jq .id)
+gh api --method POST repos/{owner}/{repo}/issues/<부모번호>/sub_issues -F sub_issue_id=$id
+```
+
+### 이슈 닫기
+
+문제를 풀고 `/problem-feedback` 까지 끝나면 하위 이슈를 닫는다.
+부모 이슈는 하위가 전부 닫힌 뒤에 닫는다.
