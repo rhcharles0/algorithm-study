@@ -144,7 +144,7 @@ SWEA `5644` 무선 충전, `5650` 핀볼 게임, `4014` 활주로 건설도 이 
 cp -r ../_template-problem swea/2382
 ```
 
-풀고 나서 `/feedback problems/swea/2382` → 복잡도·문제점·대안이 채워진다.
+풀고 나서 `/problem-feedback problems/swea/2382` → 복잡도·문제점·대안이 채워진다.
 Phase 가 끝날 때마다 위 체크박스를 채우고 커밋한다.
 
 ```bash

@@ -26,6 +26,7 @@ public class Solution {
     // 프로그래머스류: 이 메서드만 제출
 
     static int solve(String numbers) {
+        primeSet.clear();
         int answer = 0;
         end = numbers.length();
         recur(numbers,-1,0, 0 );
@@ -39,9 +40,9 @@ public class Solution {
 
         // 예제 케이스 검증
         assert solve("17") == 3 : "sample 1";
-        System.out.println(solve("17"));
+        // System.out.println(solve("17"));
 
         assert solve("011") == 2 : "sample 2";
-        System.out.println(solve("011"));
+        // System.out.println(solve("011"));
     }
 }

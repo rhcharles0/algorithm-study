@@ -6,7 +6,7 @@
 ## 스킬
 
 - **`ponytail`** — 이 레포의 모든 코드 작업에 적용한다. 가장 단순하게 동작하는 풀이가 정답이다.
-- **`feedback`** — 문제 폴더의 코드를 읽고 그 폴더 `README.md` 의 `---` 아래를 갱신한다. 정의: [.claude/skills/feedback/SKILL.md](.claude/skills/feedback/SKILL.md)
+- **`problem-feedback`** — 문제 폴더의 코드를 읽고 그 폴더 `README.md` 의 `---` 아래를 갱신한다. 정의: [.claude/skills/problem-feedback/SKILL.md](.claude/skills/problem-feedback/SKILL.md)
 
 ## 구조
 
@@ -41,7 +41,7 @@ _template-problem/    concepts/_template.md        템플릿
 ## 에이전트가 하지 말 것
 
 - **사용자 대신 문제를 풀지 않는다.** 풀이 코드는 사용자가 쓴다. 요청받으면 힌트와 접근법을 주고, 정답 코드는 명시적으로 요구할 때만 쓴다.
-- `/feedback` 은 피드백만 쓴다. 코드를 고치지 않는다. 고쳐달라고 하면 그때 고친다.
+- `/problem-feedback` 은 피드백만 쓴다. 코드를 고치지 않는다. 고쳐달라고 하면 그때 고친다.
 - 문제 README 의 `---` 위쪽(문제 요약, 풀이 접근)은 사용자 영역이다. 덮어쓰지 않는다.
 - 푼 문제 목록을 README 에 손으로 관리하지 않는다. 반드시 썩는다.
 

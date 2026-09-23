@@ -28,7 +28,7 @@ problems/                       문제 풀이 (코드) — 출처별
           └── solution.cpp
 
 _template-problem/              문제 폴더 템플릿
-.claude/skills/feedback/        /feedback 스킬 정의
+.claude/skills/problem-feedback/ /problem-feedback 스킬 정의
 ```
 
 ### 명명 규칙
@@ -85,7 +85,7 @@ g++ -std=c++17 -O2 solution.cpp -o /tmp/sol && /tmp/sol
 **6. 피드백**
 
 ```
-/feedback problems/programmers/42586
+/problem-feedback problems/programmers/42586
 ```
 
 카테고리 · 시간/공간 복잡도 · 현재 풀이의 문제점 · 다른 대안 · 놓친 엣지 케이스가 README에 채워지고,
@@ -124,13 +124,13 @@ git add . && git commit -m "solve: PG 42586 기능개발 (java, cpp)"
 
 ---
 
-## `/feedback` 스킬
+## `/problem-feedback` 스킬
 
 문제 폴더의 코드를 읽고 그 폴더 `README.md` 의 `---` 아래를 갱신한다. **코드는 고치지 않는다.**
 
 ```
-/feedback problems/programmers/42586
-/feedback                                      # 인자 없으면 가장 최근 수정된 문제 폴더
+/problem-feedback problems/programmers/42586
+/problem-feedback                                      # 인자 없으면 가장 최근 수정된 문제 폴더
 ```
 
 채워지는 항목:
@@ -142,7 +142,7 @@ git add . && git commit -m "solve: PG 42586 기능개발 (java, cpp)"
 - **다른 대안** — 더 나은 접근을 복잡도 비교와 함께
 - **놓친 엣지 케이스** — 빈 입력, 원소 1개, 경계값, 음수 등
 
-정의: [.claude/skills/feedback/SKILL.md](.claude/skills/feedback/SKILL.md)
+정의: [.claude/skills/problem-feedback/SKILL.md](.claude/skills/problem-feedback/SKILL.md)
 
 ---
 

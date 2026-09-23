@@ -1,9 +1,9 @@
 ---
-name: feedback
-description: 문제 풀이 폴더의 코드를 분석해서 그 폴더의 README.md에 카테고리, 시간/공간 복잡도, 현재 풀이의 문제점, 다른 대안, 엣지 케이스 피드백을 채워 넣는다. 사용자가 "/feedback <폴더>", "피드백 달아줘", "이 풀이 분석해줘", "복잡도 정리해줘" 라고 할 때 사용.
+name: problem-feedback
+description: 문제 풀이 폴더의 코드를 분석해서 그 폴더의 README.md에 카테고리, 시간/공간 복잡도, 현재 풀이의 문제점, 다른 대안, 엣지 케이스 피드백을 채워 넣는다. 사용자가 "/problem-feedback <폴더>", "피드백 달아줘", "이 풀이 분석해줘", "복잡도 정리해줘" 라고 할 때 사용.
 ---
 
-# feedback
+# problem-feedback
 
 문제 폴더 하나를 받아 코드를 읽고 그 폴더의 `README.md`를 갱신한다.
 
