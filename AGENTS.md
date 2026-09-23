@@ -86,7 +86,9 @@ git config alias.cm '!bash scripts/git-cm.sh'
 - **부모 이슈 본문에 문제 체크리스트를 두지 않는다.** 하위 이슈와 두 군데를 손으로 맞추면 반드시 어긋난다.
   GitHub 이 sub-issue 진행률(`2/7`)을 자동 집계한다.
 - 하위 이슈 제목은 `<출처 약어> <번호> <문제 이름> — <유형>` (예: `PG 43165 타겟 넘버 — DFS`).
-- 하위 이슈 본문에는 출처·번호·링크·유형 표와 `Java 풀이 / C++ 풀이 / problem-feedback 실행` 체크박스만.
+- 하위 이슈 본문에는 출처·번호·링크·유형·**시작일·마감일** 표와
+  `Java 풀이 / C++ 풀이 / problem-feedback 실행` 체크박스만.
+  시작일·마감일은 **그 문제가 속한 Phase 의 기간**을 쓴다 (아래 일정표).
 - Phase 별 문제 목록의 출처는 [problems/README.md](problems/README.md) 다. **번호를 지어내지 않는다.**
   커리큘럼에 없는 문제를 이슈로 만들려면 먼저 커리큘럼에 추가하고 커밋한다.
 
@@ -106,7 +108,7 @@ gh api graphql -f query='{ repository(owner:"rhcharles0", name:"algorithm-study"
 | 라벨 | 역할 |
 |---|---|
 | `phase` | 상위 이슈 — Phase 단위 묶음 |
-| `problem` | 하위 이슈 — 문제 하나 |
+| `problem` | 하위 이슈 — 문제 하나, 또는 트랙·모의고사 같은 단위 작업 하나 |
 
 성격 라벨(`bug` `docs` `refactor` `chore` `tooling` `ci` `structure` `skill` `curriculum`)은
 역할 라벨과 **같이** 붙인다. Phase 이슈에는 `curriculum` 을 함께 단다.
@@ -141,6 +143,52 @@ gh ic -t "PG 43165 타겟 넘버 — DFS" -l problem -F -   # -a @me 가 이미 
 id=$(gh api repos/{owner}/{repo}/issues/<하위번호> --jq .id)
 gh api --method POST repos/{owner}/{repo}/issues/<부모번호>/sub_issues -F sub_issue_id=$id
 ```
+
+### 마일스톤 · 일정
+
+**Phase 마다 마일스톤 하나.** 부모 이슈와 그 하위 이슈를 전부 같은 마일스톤에 넣는다.
+마일스톤은 마감일(`due_on`)만 가질 수 있어서 **시작일은 설명란에 적는다.**
+
+```bash
+gh api --method POST repos/{owner}/{repo}/milestones \
+  -f title="Phase 1 — SWEA 모의 입문" \
+  -f due_on="2026-10-13T23:59:59Z" \
+  -f description="기간: 2026-09-30 ~ 2026-10-13 · 한 문제 60분 안에 구현 완료 (2주, 8문제)"
+```
+
+현재 일정 — 커리큘럼 8주를 그대로 끊었다.
+
+| 마일스톤 | 시작 | 마감 |
+|---|---|---|
+| Phase 0 — 감 되찾기 | 2026-09-23 | 2026-09-29 |
+| Phase 1 — SWEA 모의 입문 | 2026-09-30 | 2026-10-13 |
+| Phase 2 — SWEA 모의 중급 | 2026-10-14 | 2026-10-27 |
+| Phase 3 — 코드트리 기출 | 2026-10-28 | 2026-11-10 |
+| Phase 4 — 실전 모의 | 2026-11-11 | 2026-11-17 |
+
+**일정을 바꾸면 세 군데를 같이 고친다** — 마일스톤 / 프로젝트 날짜 필드 / 이 표.
+
+### 프로젝트 보드
+
+[Project #1 `algorithm-study`](https://github.com/users/rhcharles0/projects/1) 에 모든 이슈를 올린다.
+기본 `Start date` · `Target date` 필드에 해당 Phase 의 시작·마감을 넣으면 로드맵 뷰에서 간트로 보인다.
+
+```bash
+PID=PVT_kwHODKXa3M4BkbU9
+FS=PVTF_lAHODKXa3M4BkbU9zhjL8Bs   # Start date
+FT=PVTF_lAHODKXa3M4BkbU9zhjL8B0   # Target date
+
+iid=$(gh project item-add 1 --owner rhcharles0 --format json \
+      --url https://github.com/rhcharles0/algorithm-study/issues/<번호> --jq .id)
+gh project item-edit --id "$iid" --project-id $PID --field-id $FS --date 2026-09-30
+gh project item-edit --id "$iid" --project-id $PID --field-id $FT --date 2026-10-13
+```
+
+필드 id 는 `gh project field-list 1 --owner rhcharles0` 로 다시 뽑을 수 있다.
+`gh auth` 토큰에 **`project` 스코프**가 필요하다.
+
+> 프로젝트 아이템은 추가 직후 집계(`items.totalCount`)에 바로 안 잡힌다. 인덱싱 지연이니
+> 실패로 보고 재시도하지 마라 — 이슈 쪽 `projectItems` 로 확인하면 이미 들어가 있다.
 
 ### 이슈 닫기
 
