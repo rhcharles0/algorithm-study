@@ -1,0 +1,47 @@
+name: commit convention
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 커밋 메시지 규칙 검사
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            range="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+          elif [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            range="${{ github.sha }} -1"   # 첫 푸시: 마지막 커밋만
+          else
+            range="${{ github.event.before }}..${{ github.sha }}"
+          fi
+
+          fail=0
+          while IFS= read -r msg; do
+            [ -z "$msg" ] && continue
+            case "$msg" in
+              Merge*|Revert*) continue ;;
+            esac
+            if ! printf '%s' "$msg" | grep -qE '^(solve|feedback|note|fix|refactor|docs|chore): .+'; then
+              echo "::error::규칙 위반 → $msg"
+              fail=1
+            fi
+          done < <(git log --format=%s $range)
+
+          if [ $fail -eq 1 ]; then
+            echo ""
+            echo "커밋 메시지 형식: <type>: <설명>"
+            echo "type: solve | feedback | note | fix | refactor | docs | chore"
+            echo "예시: solve: PG 42586 기능개발 (java, cpp)"
+            echo ""
+            echo "고치기: git commit --amend   (여러 개면 git rebase -i)"
+            exit 1
+          fi
+          echo "모든 커밋 메시지 OK"
+        shell: bash

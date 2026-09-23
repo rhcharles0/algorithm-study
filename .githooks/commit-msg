@@ -1,0 +1,16 @@
+#!/bin/sh
+# 커밋 전에 메시지 규칙 검사. 설정: git config core.hooksPath .githooks
+msg=$(head -1 "$1")
+
+case "$msg" in
+  Merge*|Revert*|fixup!*|squash!*) exit 0 ;;
+esac
+
+if ! printf '%s' "$msg" | grep -qE '^(solve|feedback|note|fix|refactor|docs|chore): .+'; then
+  echo "커밋 메시지 규칙 위반: $msg"
+  echo "형식: <type>: <설명>"
+  echo "type: solve | feedback | note | fix | refactor | docs | chore"
+  echo "예시: solve: PG 42586 기능개발 (java, cpp)"
+  exit 1
+fi
+
