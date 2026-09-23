@@ -13,15 +13,15 @@
 
 ## 문제 요약
 
-<한두 줄로>
+<비워두면 /problem-feedback 이 채운다>
 
 ## 풀이 접근
 
-<어떻게 생각해서 풀었는지>
+<비워두면 /problem-feedback 이 코드를 읽고 채운다>
 
 ---
 
-<!-- 아래는 /problem-feedback 스킬이 채우는 영역 -->
+<!-- 아래는 /problem-feedback 스킬이 항상 덮어쓰는 영역 -->
 
 ## 복잡도
 
