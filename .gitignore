@@ -1,0 +1,39 @@
+# --- Java ---
+*.class
+*.jar
+*.war
+bin/
+out/
+target/
+build/
+.gradle/
+
+# --- C / C++ ---
+*.o
+*.obj
+*.out
+*.exe
+*.a
+*.so
+*.dylib
+*.gch
+*.pch
+a.out
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+
+# --- IDE / OS ---
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# 실행 파일 (확장자 없는 컴파일 산출물)
+solution
+main
