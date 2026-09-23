@@ -68,4 +68,7 @@ note: 힙 / 우선순위 큐
 ```bash
 git config core.hooksPath .githooks
 git config alias.cm '!bash scripts/git-cm.sh'
+git config alias.ps '!bash scripts/new-problem.sh'
 ```
+
+문제 폴더는 `git ps <pg|swea|ct|lc|boj> <번호>` 로 만든다. `cp -r _template-problem ...` 을 직접 치지 않는다.

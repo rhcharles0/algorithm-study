@@ -1,0 +1,30 @@
+#!/bin/bash
+# git ps <출처> <번호> — 문제 폴더를 템플릿에서 만든다.
+#   git ps pg 42586    →  problems/programmers/42586/
+#   git ps swea 2382   →  problems/swea/2382/
+#   git ps lc 1        →  problems/leetcode/0001/   (4자리 zero-pad)
+set -e
+cd "$(git rev-parse --show-toplevel)"
+
+case "$1" in
+  pg|programmers) site=programmers ;;
+  swea)           site=swea ;;
+  ct|codetree)    site=codetree ;;
+  lc|leetcode)    site=leetcode ;;
+  boj|baekjoon)   site=baekjoon ;;
+  *)
+    echo "사용법: git ps <pg|swea|ct|lc|boj> <문제번호>"
+    echo "예:     git ps pg 42586"
+    exit 1 ;;
+esac
+
+id="$2"
+[ -z "$id" ] && { echo "문제 번호를 입력하세요"; exit 1; }
+[ "$site" = leetcode ] && [[ "$id" =~ ^[0-9]+$ ]] && id=$(printf "%04d" "$id")
+
+dir="problems/$site/$id"
+[ -e "$dir" ] && { echo "이미 있습니다: $dir"; exit 1; }
+
+cp -r _template-problem "$dir"
+echo "생성됨: $dir"
+echo "  cd $dir"

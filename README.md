@@ -55,9 +55,19 @@ _template-problem/              문제 폴더 템플릿
 **1. 폴더 생성**
 
 ```bash
-cp -r _template-problem problems/programmers/42586
+git ps pg 42586          # → problems/programmers/42586/ 생성
 cd problems/programmers/42586
 ```
+
+| 출처 인자 | 폴더 |
+|---|---|
+| `pg` | `programmers` |
+| `swea` | `swea` |
+| `ct` | `codetree` |
+| `lc` | `leetcode` — 번호를 4자리로 자동 zero-pad (`git ps lc 1` → `0001`) |
+| `boj` | `baekjoon` |
+
+이미 있는 폴더면 덮어쓰지 않고 멈춘다.
 
 **2. README 위쪽 먼저 작성** — 제목(문제 이름) / 출처 / 번호 / 링크 / 난이도 / 푼 날짜, 그리고 `문제 요약`, `풀이 접근`.
 
@@ -178,6 +188,7 @@ git add . && git commit -m "solve: PG 42586 기능개발 (java, cpp)"
 ```bash
 git config core.hooksPath .githooks
 git config alias.cm '!bash scripts/git-cm.sh'
+git config alias.ps '!bash scripts/new-problem.sh'
 ```
 
 ### `git cm` — 타입 자동 완성
