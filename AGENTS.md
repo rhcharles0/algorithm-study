@@ -23,7 +23,7 @@ _template-problem/    concepts/_template.md        템플릿
 ## 코드 규칙
 
 - **Java 11+ / C++17.** 한 문제는 두 언어 모두로 푼다. C++ 는 Java 번역이 아니라 STL 관용구로 쓴다.
-- **빌드 시스템 없음.** `java Solution.java`, `g++ -std=c++17 -O2 solution.cpp -o /tmp/sol` 로 끝. Gradle/Maven/CMake 파일을 만들지 않는다.
+- **빌드 시스템 없음.** `java -ea Solution.java`, `g++ -std=c++17 -O2 solution.cpp -o /tmp/sol` 로 끝. Gradle/Maven/CMake 파일을 만들지 않는다.
 - 실행 파일은 `/tmp` 로 뺀다. 빌드 산출물은 커밋하지 않는다 (`.gitignore`).
 - 예제 케이스는 각 파일 `main` 의 `assert` 로 검증한다. 테스트 프레임워크를 도입하지 않는다.
 - 파일명 고정: `Solution.java`, `solution.cpp`. 한 문제 = 한 파일 (언어당).

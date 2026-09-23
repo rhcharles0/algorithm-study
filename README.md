@@ -69,7 +69,7 @@ cd problems/programmers/42586
 **3. Java 풀이**
 
 ```bash
-java Solution.java
+java -ea Solution.java
 ```
 
 **4. C++ 풀이**
@@ -115,7 +115,7 @@ git add . && git commit -m "solve: PG 42586 기능개발 (java, cpp)"
 
 | 언어 | 요구 버전 | 실행 |
 |---|---|---|
-| Java | JDK 11+ | `java Solution.java` |
+| Java | JDK 11+ | `java -ea Solution.java` — **`-ea` 없으면 `assert` 가 무시된다** |
 | C++ | g++ / clang++ (C++17) | `g++ -std=c++17 -O2 solution.cpp -o /tmp/sol && /tmp/sol` |
 
 - 표준입력 문제는 `< input.txt` 로 테스트한다.
