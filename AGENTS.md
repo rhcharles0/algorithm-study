@@ -90,6 +90,29 @@ git config alias.cm '!bash scripts/git-cm.sh'
 - Phase 별 문제 목록의 출처는 [problems/README.md](problems/README.md) 다. **번호를 지어내지 않는다.**
   커리큘럼에 없는 문제를 이슈로 만들려면 먼저 커리큘럼에 추가하고 커밋한다.
 
+### 타입 표시는 라벨로 한다
+
+**GitHub Issue Types 는 Organization 전용 기능이라 이 레포에서는 쓸 수 없다.**
+개인 계정(User) 소유 레포는 `issueTypes` 가 `null` 이고 `/users/{user}/issue-types` 엔드포인트가 없다.
+확인:
+
+```bash
+gh api graphql -f query='{ repository(owner:"rhcharles0", name:"algorithm-study") { issueTypes(first:10) { nodes { name } } } }'
+# => {"data":{"repository":{"issueTypes":null}}}
+```
+
+그래서 **역할 구분은 라벨로 한다. 모든 이슈에 아래 둘 중 하나를 반드시 붙인다.**
+
+| 라벨 | 역할 |
+|---|---|
+| `phase` | 상위 이슈 — Phase 단위 묶음 |
+| `problem` | 하위 이슈 — 문제 하나 |
+
+성격 라벨(`bug` `docs` `refactor` `chore` `tooling` `ci` `structure` `skill` `curriculum`)은
+역할 라벨과 **같이** 붙인다. Phase 이슈에는 `curriculum` 을 함께 단다.
+
+레포를 Organization 으로 옮기면 이 절은 폐기하고 실제 Issue Type 으로 갈아탄다.
+
 ### 이슈 생성
 
 **항상 자신에게 assign 한다.** 개인 레포라 미할당 이슈는 관리 대상에서 새어 나간다.
@@ -100,8 +123,11 @@ gh alias set ic 'issue create -a @me'
 ```
 
 ```bash
-gh ic -t "PG 43165 타겟 넘버 — DFS" -F -     # -a @me 가 이미 붙어 있다
+gh ic -t "PG 43165 타겟 넘버 — DFS" -l problem -F -   # -a @me 가 이미 붙어 있다
 ```
+
+**역할 라벨(`-l phase` 또는 `-l problem`)을 빼먹지 않는다.** 이 레포에 Issue Type 이 없으니
+라벨이 유일한 타입 표시다.
 
 **에이전트는 `gh issue create` 를 직접 쓰지 않는다.** `gh ic` 를 쓰거나,
 불가능하면 `-a @me` 를 명시적으로 붙인다.
