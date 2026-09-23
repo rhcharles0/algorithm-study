@@ -27,7 +27,7 @@ cp concepts/_template.md concepts/data-structure/stack.md
 - [ ] `binary-search.md` 이분 탐색
 - [ ] `two-pointer.md` 투 포인터 / 슬라이딩 윈도우
 - [ ] `dfs-bfs.md` DFS / BFS
-- [ ] `backtracking.md` 백트래킹
+- [x] [`backtracking.md`](algorithm/backtracking.md) 백트래킹 — 비트마스크 방문 처리
 - [ ] `greedy.md` 그리디
 - [ ] `dp.md` 동적 계획법
 - [ ] `shortest-path.md` 최단 경로 (다익스트라, 플로이드)
