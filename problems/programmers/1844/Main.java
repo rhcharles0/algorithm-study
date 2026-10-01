@@ -7,7 +7,8 @@ public class Main {
         Solution s = new Solution();
 
         // 예제 케이스. 배열 반환이면 == 가 아니라 Arrays.equals 를 쓴다.
-        assert s.solution(new int[]{1, 2, 3}) == 0 : "sample 1";
+        assert s.solution(new int[][]{{1,0,1,1,1},{1,0,1,0,1},{1,0,1,1,1},{1,1,1,0,1},{0,0,0,0,1}}) == 11 : "sample 1";
+        assert s.solution(new int[][]{{1,0,1,1,1},{1,0,1,0,1},{1,0,1,1,1},{1,1,1,0,0},{0,0,0,0,1}}) == -1 : "sample 2";
 
         System.out.println("모든 예제 통과");
     }
