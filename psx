@@ -1,0 +1,66 @@
+#!/bin/bash
+# psx <출처> <번호> — 문제 폴더를 템플릿에서 만든다. (problem solving)
+# 인자 없이 실행하면 대화형으로 물어본다. psx help 로 사용법.
+set -e
+# 스크립트 자기 위치가 레포 루트다. cwd 에 의존하지 않으므로 어디서 실행해도 된다
+# (~/.local/bin/psx 심볼릭 링크로 불려도 readlink -f 가 실체를 찾아준다).
+cd "$(dirname "$(readlink -f "$0")")"
+
+MENU="  p) programmers   s) swea   c) codetree   l) leetcode   b) baekjoon"
+
+usage() {
+  cat <<'USAGE'
+사용법: psx [출처] [문제번호]     ← 어느 폴더에서든 된다
+       ./psx  [출처] [문제번호]     ← 레포 루트에서
+
+  출처는 한 글자 / 약어 / 전체 이름 아무거나 된다.
+
+    p  pg    programmers   psx p 42586    → problems/programmers/42586/
+    s        swea          psx s 2382     → problems/swea/2382/
+    c  ct    codetree      psx c maze     → problems/codetree/maze/
+    l  lc    leetcode      psx l 1        → problems/leetcode/0001/   (4자리 zero-pad)
+    b  boj   baekjoon      psx b 1912     → problems/baekjoon/1912/
+
+  psx          인자 없이 실행 → 대화형으로 물어본다
+  psx help     이 도움말
+
+  psx 가 없다면 (클론 직후 한 번):
+    git config alias.ps '!bash ps'
+
+  이미 있는 폴더는 덮어쓰지 않는다.
+USAGE
+}
+
+resolve() {
+  case "$1" in
+    p|pg|programmers) site=programmers ;;
+    s|swea)           site=swea ;;
+    c|ct|codetree)    site=codetree ;;
+    l|lc|leetcode)    site=leetcode ;;
+    b|boj|baekjoon)   site=baekjoon ;;
+    *) return 1 ;;
+  esac
+}
+
+case "$1" in -h|--help|help) usage; exit 0 ;; esac
+
+if [ -z "$1" ]; then
+  echo "$MENU"
+  read -rsn1 -p "출처: " key; echo
+  resolve "$key" || { echo "취소"; exit 1; }
+  echo "  → $site"
+  read -rp "문제 번호: " id
+else
+  resolve "$1" || { echo "알 수 없는 출처: '$1'"; echo; usage; exit 1; }
+  id="$2"
+fi
+
+[ -z "$id" ] && { echo "문제 번호가 비었습니다"; exit 1; }
+[ "$site" = leetcode ] && [[ "$id" =~ ^[0-9]+$ ]] && id=$(printf "%04d" "$id")
+
+dir="problems/$site/$id"
+[ -e "$dir" ] && { echo "이미 있습니다: $dir"; exit 1; }
+
+cp -r _template-problem "$dir"
+echo "생성됨: $dir"
+echo "  cd $PWD/$dir"      # 레포 밖에서 불렀을 수도 있으니 전체 경로로
