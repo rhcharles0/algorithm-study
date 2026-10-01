@@ -1,3 +1,4 @@
+import java.util.*;
 // 제출본. 이 파일만 그대로 복사해서 낸다. main 도 assert 도 여기 넣지 않는다.
 // 검증은 Main.java 에서 한다.
 class Solution {
