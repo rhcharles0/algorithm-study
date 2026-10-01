@@ -38,6 +38,7 @@ Thumbs.db
 solution
 main
 
-# -- AGENTS -- 
+# Local-only agent instructions
 .agents/
+# AGENTS.md files at any directory depth
 AGENTS.md

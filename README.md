@@ -30,8 +30,9 @@ problems/                       문제 풀이 (코드) — 출처별
           └── main.cpp          로컬 검증
 
 _template-problem/              문제 폴더 템플릿
-.claude/skills/problem-feedback/ /problem-feedback 스킬 정의
 ```
+
+에이전트용 `AGENTS.md`와 `.agents/` 설정은 개인 로컬 지침이며 Git 추적에서 제외한다.
 
 ### 명명 규칙
 
@@ -144,7 +145,7 @@ git add . && git commit -m "solve: PG 42586 기능개발 (java, cpp)"
 
 ## 실행 환경
 
-빌드 시스템 없이 단일 파일로 실행한다. 빌드 산출물(`*.class`, 실행 파일, IDE 설정)은 `.gitignore` 처리되어 **순수 소스 코드만 커밋된다.**
+빌드 시스템 없이 단일 파일로 실행한다. 빌드 산출물(`*.class`, 실행 파일, IDE 설정)과 개인 에이전트 지침은 `.gitignore` 처리되어 커밋에서 제외된다.
 
 | 언어 | 요구 버전 | 실행 |
 |---|---|---|
@@ -175,7 +176,7 @@ git add . && git commit -m "solve: PG 42586 기능개발 (java, cpp)"
 - **다른 대안** — 더 나은 접근을 복잡도 비교와 함께
 - **놓친 엣지 케이스** — 빈 입력, 원소 1개, 경계값, 음수 등
 
-정의: [.claude/skills/problem-feedback/SKILL.md](.claude/skills/problem-feedback/SKILL.md)
+`/problem-feedback` 상세 지침은 로컬 `.agents/skills/problem-feedback/`에 있으며 저장소에는 포함되지 않는다.
 
 ---
 
